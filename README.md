@@ -48,3 +48,65 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+You are seeing this error because `react-native-maps` is a native module and is **not supported in Expo Go**. The error:
+
+> TurboModuleRegistry.getEnforcing(...): 'RNMapsAirModule' could not be found. Verify that a module by this name is registered in the native binary.
+
+means the native code for the map is not present in the Expo Go app.
+
+---
+
+## How to Fix
+
+### 1. **You must use a custom development build (Expo Dev Client) or the prebuild workflow.**
+
+#### **Option A: Expo Dev Client (Recommended)**
+1. **Install EAS CLI** (if you haven't):
+   ```sh
+   npm install -g eas-cli
+   ```
+2. **Configure your app for EAS Build:**
+   ```sh
+   eas build:configure
+   ```
+3. **Build a development client:**
+   ```sh
+   eas build --profile development --platform ios
+   ```
+   or for Android:
+   ```sh
+   eas build --profile development --platform android
+   ```
+4. **Install the build on your device** (Expo will give you a QR code or download link).
+5. **Open your project in the new Expo Dev Client** (not Expo Go).
+
+#### **Option B: Expo Prebuild (Bare) Workflow**
+1. Run:
+   ```sh
+   npx expo prebuild
+   ```
+2. Then run:
+   ```sh
+   npx expo run:ios
+   ```
+   or
+   ```sh
+   npx expo run:android
+   ```
+
+---
+
+### 2. **If you want to stay in Expo Go:**
+You cannot use `react-native-maps`. You would need to use the Expo SDK's managed map component (if available), but it is not as full-featured as `react-native-maps`.
+
+---
+
+## **Summary**
+- You cannot use `react-native-maps` in Expo Go.
+- You must use a custom dev client (EAS Build) or prebuild and run on a simulator/device.
+- Follow the steps above to get your map working!
+
+---
+
+Would you like to proceed with EAS Build or prebuild? I can walk you through the exact commands and steps for your platform (iOS/Android)!
