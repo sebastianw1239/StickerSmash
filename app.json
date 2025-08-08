@@ -12,7 +12,8 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "SameTime needs location access to help you coordinate meetups with friends and family.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "SameTime needs location access to provide real-time ETA updates to your group."
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "SameTime needs location access to provide real-time ETA updates to your group.",
+        "UIBackgroundModes": ["location"]
       }
     },
     "android": {
@@ -22,12 +23,19 @@
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
+        "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION"
+        "ACCESS_BACKGROUND_LOCATION"
       ]
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-location",
+        {
+          "isAndroidForegroundServiceEnabled": true
+        }
+      ],
       [
         "expo-splash-screen",
         {
